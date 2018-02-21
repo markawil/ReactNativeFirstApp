@@ -29,4 +29,7 @@ const RootStack = StackNavigator({
     MainView: {
         screen: MainView,
     },
+    initialRouteName: {
+        screen: Login,
+    }
 });
