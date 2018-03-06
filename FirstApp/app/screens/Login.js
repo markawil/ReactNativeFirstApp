@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Alert } from "react-native";
-//import MainView from "./app/screens/MainView";
 import { StackNavigator } from 'react-navigation';
 
 export default class Login extends Component {

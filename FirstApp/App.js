@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import Login from "./app/screens/Login";
 import MainView from "./app/screens/MainView";
+import ItemsListView from "./app/screens/ItemsListView";
 import { StackNavigator } from 'react-navigation';
 
 export default class App extends Component {
@@ -28,6 +29,9 @@ const RootStack = StackNavigator({
     },
     MainView: {
         screen: MainView,
+    },
+    ItemsListView: {
+        screen: ItemsListView,
     },
     initialRouteName: {
         screen: Login,
