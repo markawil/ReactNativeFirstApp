@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ScrollView, StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
+import { Modal, TouchableWithoutFeedback, ScrollView, StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import { StackNavigator } from 'react-navigation';
 
 export default class ItemsListView extends Component {
@@ -16,6 +16,7 @@ export default class ItemsListView extends Component {
              {key:'6', title:'The Second World War', year:'2012'},
             ],
             modalVisible: false,
+            gestureName: 'none',
         };
     }
 
@@ -54,29 +55,36 @@ export default class ItemsListView extends Component {
         );
     };
 
+    _scrollViewPressed = () => {
+        this.setModalVisible(false);
+    };
+
     _renderModalContent = () => (
         <ScrollView>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
-            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <TouchableOpacity onPress={this._scrollViewPressed}>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+                <Text style={{fontSize:50}}>Scroll me plz</Text>
+            </TouchableOpacity>
         </ScrollView>
     );
 
     render() {
-        return(
+
+        return (
             <View>
                 <Modal
                     animationType="slide"
