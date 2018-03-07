@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Alert, FlatList, TouchableOpacity } from "react-native";
+import { Modal, StyleSheet, Text, View, Alert, FlatList, TouchableOpacity, TouchableHighlight } from "react-native";
 import { StackNavigator } from 'react-navigation';
 
 export default class ItemsListView extends Component {
@@ -14,9 +14,18 @@ export default class ItemsListView extends Component {
              {key:'4', title:'Crete 1941', year:'2002'},
              {key:'5', title:'Ardennes 1944', year:'2014'},
              {key:'6', title:'The Second World War', year:'2012'},
-            ]
+            ],
+            modalVisible: false,
         };
     }
+
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    }
+
+    static navigationOptions = {
+      title:"Books by Antony Beevor",
+    };
 
     _keyExtractor = (item, index) => item.key;
 
@@ -25,31 +34,74 @@ export default class ItemsListView extends Component {
             id = {item.key}
             title = {item.title}
             year = {item.year}
-            // set onPressItemHere
+            onPressItem = {this._onPressItem}
         />
+    );
+
+    _onPressItem = (id: string) => {
+        this.setModalVisible(true);
+    };
+
+    renderSeparator = () => {
+        return (
+          <View
+            style={{
+              height: 1,
+              width: "100%",
+              backgroundColor: "#CED0CE",
+            }}
+          />
+        );
+    };
+
+    _renderModalContent = () => (
+        <View style={{marginTop: 22}}>
+            <View>
+              <TouchableHighlight
+                onPress={() => {
+                  this.setModalVisible(false);
+                }}>
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+        </View>
     );
 
     render() {
         return(
-            <FlatList
-                data = { this.state.items }
-                renderItem = { this._renderItem }
-                keyExtractor = { this._keyExtractor }
-            />
+            <View>
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {
+                        alert('Modal has been closed');
+                    }}>
+                    {this._renderModalContent()}
+                </Modal>
+                <FlatList
+                    data = { this.state.items }
+                    renderItem = { this._renderItem }
+                    keyExtractor = { this._keyExtractor }
+                    ItemSeparatorComponent={this.renderSeparator}
+                    onPressItem={this._onPressItem}
+                    style={{backgroundColor: '#d7ddd4'}}
+                />
+            </View>
         );
     }
 }
 
 export class ItemView extends Component {
 
-    // _onPress = () => {
-    //     this.props.onPressItem(this.props.id);
-    // };
+    _onPress = () => {
+        this.props.onPressItem(this.props.id);
+    };
 
     render() {
         return (
-            <TouchableOpacity> 
-                <View>
+            <TouchableOpacity onPress={this._onPress}>
+                <View style={{backgroundColor: '#c5ffaa'}}>
                     <Text style={{margin: 5}}>{this.props.title}</Text>
                     <Text style={{margin: 10}}>{this.props.year}</Text>
                 </View>
