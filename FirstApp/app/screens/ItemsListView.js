@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, StyleSheet, Text, View, Alert, FlatList, TouchableOpacity, TouchableHighlight } from "react-native";
+import { Modal, ScrollView, StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import { StackNavigator } from 'react-navigation';
 
 export default class ItemsListView extends Component {
@@ -55,16 +55,24 @@ export default class ItemsListView extends Component {
     };
 
     _renderModalContent = () => (
-        <View style={{marginTop: 22}}>
-            <View>
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(false);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-        </View>
+        <ScrollView>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+            <Text style={{fontSize:50}}>Scroll me plz</Text>
+        </ScrollView>
     );
 
     render() {
