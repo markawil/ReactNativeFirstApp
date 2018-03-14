@@ -10,7 +10,7 @@ export default class LaunchView extends Component {
             nasaUrls: [],
             error: null,
             refreshing: false,
-            responseJson: 'nothing returned yet.'
+            responseJson: "nothing returned yet."
         };
     }
 
@@ -21,7 +21,8 @@ export default class LaunchView extends Component {
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    responseJson: JSON.stringify(responseJson.agencies)
+                    responseJson: JSON.stringify(responseJson),
+                    nasaUrls: responseJson.agencies[0].infoURLs
                 });
             })
             .catch((error) => {
@@ -47,7 +48,7 @@ export default class LaunchView extends Component {
 
     _renderItem = ({url}) => (
         <LaunchItemView
-            urlPath = {url.path}
+            urlPath = {'the path is ${url}'}
             onPressItem = {this._onPressItem}
         />
     );
@@ -71,7 +72,13 @@ export default class LaunchView extends Component {
     render() {
         return (
             <View>
-                <Text style={{margin: 10}}>{this.state.responseJson}</Text>
+                <Text>{this.state.responseJson}</Text>
+                <FlatList
+                    data = { this.state.nasaUrls }
+                    renderItem = { this._renderItem }
+                    ItemSeparatorComponent={this.renderSeparator}
+                    onPressItem={this._onPressItem}
+                />
             </View>
         );
     }
