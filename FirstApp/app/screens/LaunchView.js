@@ -34,12 +34,12 @@ export default class LaunchView extends Component {
       title:"Launch NASA Data",
     };
 
-    _keyExtractor = (nasaUrl, index) => index;
+    _keyExtractor = (item, index) => index.toString();
 
-    _renderItem = ({nasaUrl, index}) => (
+    _renderItem = ({item, index}) => (
         <LaunchItemView
             id = {index}
-            urlPath = {this.state.nasaUrls[index]}
+            urlPath = {item}
             onPressItem = {this._onPressItem}
         />
     );
