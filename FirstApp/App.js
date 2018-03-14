@@ -14,6 +14,7 @@ import {
 import Login from "./app/screens/Login";
 import MainView from "./app/screens/MainView";
 import ItemsListView from "./app/screens/ItemsListView";
+import LaunchView from "./app/screens/LaunchView";
 import { StackNavigator } from 'react-navigation';
 
 export default class App extends Component {
@@ -35,5 +36,8 @@ const RootStack = StackNavigator({
     },
     initialRouteName: {
         screen: Login,
+    },
+    LaunchView: {
+        screen: LaunchView,
     }
 });

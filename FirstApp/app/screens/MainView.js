@@ -24,7 +24,7 @@ export default class MainView extends Component {
                         }); }
                     }/>
                     <Text style={{margin: 10}}>{successMessage}</Text>
-                    <Button style={{margin: 10}} title="Show Items" onPress={() => navigate('ItemsListView', {}) }/>
+                    <Button style={{margin: 10}} title="Show Videos (Week 4)" onPress={() => navigate('VideosView', {}) }/>
                     <View style={{flex: 0.2}} />
                 </View>
         );

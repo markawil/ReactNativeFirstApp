@@ -21,7 +21,7 @@ export default class Login extends Component {
                 <TextInput style={{width: 200, height: 30, backgroundColor: 'white'}}
                     onChangeText={(password) => this.setState({password})}/>
                 <View style={{flex: 0.2}} />
-                <Button title="Login" onPress={() => navigate('MainView', { loginName: this.state.username}) }/>
+                <Button title="Login" onPress={() => navigate('LaunchView', { }) }/>
             </View>
         );
     }
