@@ -10,7 +10,7 @@ export default class LaunchView extends Component {
             nasaUrls: [],
             error: null,
             refreshing: false,
-            responseJson: "nothing returned yet."
+            responseJson: "nothing returned yet.",
         };
     }
 
@@ -21,7 +21,7 @@ export default class LaunchView extends Component {
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    responseJson: JSON.stringify(responseJson),
+                    responseJson: JSON.stringify(responseJson.agencies[0].infoURLs),
                     nasaUrls: responseJson.agencies[0].infoURLs
                 });
             })
@@ -34,21 +34,12 @@ export default class LaunchView extends Component {
       title:"Launch NASA Data",
     };
 
-    // async function nasaData() {
-    //     try {
-    //         let response = await fetch(nasaUrlPath);
-    //         let responseJson = await response.json();
-    //         return responseJson.agencies;
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
+    _keyExtractor = (nasaUrl, index) => index;
 
-    _keyExtractor = (item, index) => item.key;
-
-    _renderItem = ({url}) => (
+    _renderItem = ({nasaUrl, index}) => (
         <LaunchItemView
-            urlPath = {'the path is ${url}'}
+            id = {index}
+            urlPath = {this.state.nasaUrls[index]}
             onPressItem = {this._onPressItem}
         />
     );
@@ -78,6 +69,7 @@ export default class LaunchView extends Component {
                     renderItem = { this._renderItem }
                     ItemSeparatorComponent={this.renderSeparator}
                     onPressItem={this._onPressItem}
+                    keyExtractor = { this._keyExtractor }
                 />
             </View>
         );
@@ -94,6 +86,7 @@ export class LaunchItemView extends Component {
         return(
             <TouchableOpacity onPress={this._onPress}>
                 <View>
+                    <Text style={{margin: 5}}>{this.props.id}</Text>
                     <Text style={{margin: 5}}>{this.props.urlPath}</Text>
                 </View>
             </TouchableOpacity>
