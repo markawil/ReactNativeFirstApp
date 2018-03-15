@@ -9,7 +9,7 @@ export default class MainView extends Component {
     }
 
     render() {
-        var name = this.props.navigation.state.params.loginName ;
+        var name = this.props.navigation.state.params.loginName;
         var successMessage = this.state.showSuccessMessage ? 'Thank you, your answer has been submitted!' : '';
         const { navigate } = this.props.navigation;
 

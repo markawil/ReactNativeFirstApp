@@ -10,7 +10,6 @@ export default class LaunchView extends Component {
             nasaUrls: [],
             error: null,
             refreshing: false,
-            responseJson: "nothing returned yet.",
         };
     }
 
@@ -21,7 +20,6 @@ export default class LaunchView extends Component {
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    responseJson: JSON.stringify(responseJson.agencies[0].infoURLs),
                     nasaUrls: responseJson.agencies[0].infoURLs
                 });
             })
@@ -45,7 +43,9 @@ export default class LaunchView extends Component {
     );
 
     _onPressItem = (id: string) => {
-        // navigate to new view showing URL in a web view
+        const { navigate } = this.props.navigation;
+        idAsNum = parseInt(id);
+        navigate('NasaWebView', { urlPath: this.state.nasaUrls[idAsNum] })
     };
 
     _renderSeparator = () => {
@@ -63,13 +63,13 @@ export default class LaunchView extends Component {
     render() {
         return (
             <View>
-                <Text>{this.state.responseJson}</Text>
                 <FlatList
                     data = { this.state.nasaUrls }
                     renderItem = { this._renderItem }
                     ItemSeparatorComponent={this.renderSeparator}
                     onPressItem={this._onPressItem}
                     keyExtractor = { this._keyExtractor }
+                    style={{backgroundColor: '#d7ddd4'}}
                 />
             </View>
         );
@@ -86,8 +86,7 @@ export class LaunchItemView extends Component {
         return(
             <TouchableOpacity onPress={this._onPress}>
                 <View>
-                    <Text style={{margin: 5}}>{this.props.id}</Text>
-                    <Text style={{margin: 5}}>{this.props.urlPath}</Text>
+                    <Text style={{margin: 10, fontSize:20}}>{this.props.urlPath}</Text>
                 </View>
             </TouchableOpacity>
         );
