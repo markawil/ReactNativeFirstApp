@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import { StackNavigator } from 'react-navigation';
+import LaunchService from "../services/LaunchService";
 
 export default class LaunchView extends Component {
 
@@ -13,19 +14,15 @@ export default class LaunchView extends Component {
         };
     }
 
-    urlPath = 'https://launchlibrary.net/1.3/agency/NASA';
-
     componentDidMount() {
-        return fetch(this.urlPath)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    nasaUrls: responseJson.agencies[0].infoURLs
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        this.loadNasaUrls();
+    }
+
+    async loadNasaUrls() {
+        var urls = await LaunchService.getNasaUrlsAsync();
+        this.setState({
+            nasaUrls: urls
+        });
     }
 
     static navigationOptions = {
