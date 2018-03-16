@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, Button, View, FlatList, TouchableOpacity } from "react-native";
 import { StackNavigator } from 'react-navigation';
 import LaunchService from "../services/LaunchService";
 
@@ -14,15 +14,31 @@ export default class LaunchView extends Component {
         };
     }
 
-    componentDidMount() {
-        this.loadNasaUrls();
+    loadNasaUrlsFromApi() {
+        this.setState({
+            nasaUrls: []
+        })
+
+        LaunchService.getNasaUrlsAsync().then((urls) => {
+            this.setState({
+                nasaUrls: urls
+            });
+        });
     }
 
-    async loadNasaUrls() {
-        var urls = await LaunchService.getNasaUrlsAsync();
+    loadNasaUrlsFromCache() {
         this.setState({
-            nasaUrls: urls
-        });
+            nasaUrls: []
+        })
+        var that = this;
+        // I set a timeout just to prove it was clearing the list then refreshing from the cache
+        setTimeout(function() {
+            LaunchService.getCachedNasaUrls().then((urls) => {
+                that.setState({
+                    nasaUrls: urls
+                });
+            });
+        }, 2000)
     }
 
     static navigationOptions = {
@@ -60,13 +76,17 @@ export default class LaunchView extends Component {
     render() {
         return (
             <View>
+                <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: "row", backgroundColor: "#B8EDB1"}}>
+                    <Button style={{margin: 10}} title="Refresh from API" onPress={() =>  this.loadNasaUrlsFromApi() }/>
+                    <Button style={{margin: 10}} title="Load from Cache" onPress={() => this.loadNasaUrlsFromCache() }/>
+                </View>
                 <FlatList
                     data = { this.state.nasaUrls }
                     renderItem = { this._renderItem }
                     ItemSeparatorComponent={this.renderSeparator}
                     onPressItem={this._onPressItem}
                     keyExtractor = { this._keyExtractor }
-                    style={{backgroundColor: '#d7ddd4'}}
+                    style={{backgroundColor: '#d7ddd4' }}
                 />
             </View>
         );
