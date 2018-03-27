@@ -36,6 +36,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+  <key>NSCameraUsageDescription</key>
+  <string>The $(PRODUCT_NAME) App will use the camera to scan QR codes for Arbonne products.</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>The $(PRODUCT_NAME) App would like to access the Photo Library for Arbonne products.</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
