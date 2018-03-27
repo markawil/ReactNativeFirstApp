@@ -30,7 +30,7 @@ export default class LaunchView extends Component {
         this.setState({
             nasaUrls: []
         })
-        var that = this;
+        var that = this; // scope capture for the promise callback
         // I set a timeout just to prove it was clearing the list then refreshing from the cache
         setTimeout(function() {
             LaunchService.getCachedNasaUrls().then((urls) => {
